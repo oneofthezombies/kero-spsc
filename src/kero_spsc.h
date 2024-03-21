@@ -7,6 +7,8 @@
 namespace kero {
 namespace spsc {
 
+namespace internal {
+
 template <typename T>
   requires std::movable<T>
 struct Node {
@@ -23,12 +25,14 @@ struct Node {
   auto operator=(const Node&) -> Node& = delete;
 };
 
+} // namespace internal
+
 template <typename T>
   requires std::movable<T>
 class Queue {
 public:
   Queue() {
-    Node<T>* node = new Node<T>();
+    auto node = new internal::Node<T>();
     head_.store(node, std::memory_order_relaxed);
     tail_ = node;
   }
@@ -46,7 +50,7 @@ public:
   auto operator=(const Queue&) -> Queue& = default;
 
   auto enqueue(T&& data) -> void {
-    Node<T>* node = new Node<T>(std::move(data));
+    auto node = new internal::Node<T>(std::move(data));
     tail_->next = node;
     tail_ = node;
   }
@@ -65,8 +69,8 @@ public:
   }
 
 private:
-  std::atomic<Node<T>*> head_{};
-  Node<T>* tail_{};
+  std::atomic<internal::Node<T>*> head_{};
+  internal::Node<T>* tail_{};
 };
 
 } // namespace spsc
