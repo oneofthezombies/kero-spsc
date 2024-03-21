@@ -16,7 +16,7 @@ cc_library(
 
 cc_test(
     name = "kero_spsc_test",
-    srcs = ["src/kero_spsc_test.cc"],
+    srcs = ["src/internal/queue_test.cc"],
     copts = ["-std=c++20"],
     deps = [
         ":kero_spsc",
