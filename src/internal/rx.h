@@ -1,7 +1,7 @@
 #ifndef KERO_SPSC_RX_H
 #define KERO_SPSC_RX_H
 
-#include "internal/queue.h"
+#include "queue.h"
 #include <memory>
 
 namespace kero {
@@ -11,7 +11,7 @@ template <typename T>
   requires std::movable<T>
 class Rx {
 public:
-  Rx(const std::shared_ptr<internal::Queue<T>>& queue) : queue_(queue) {}
+  Rx(const std::shared_ptr<Queue<T>>& queue) : queue_{queue} {}
 
   Rx(Rx&&) = default;
   ~Rx() = default;
@@ -20,10 +20,12 @@ public:
   Rx(const Rx&) = delete;
   auto operator=(const Rx&) -> Rx& = delete;
 
-  auto TryReceive() noexcept -> std::optional<T> { return queue_->TryPop(); }
+  auto TryReceive() const noexcept -> std::optional<T> {
+    return queue_->TryDequeue();
+  }
 
 private:
-  std::shared_ptr<internal::Queue<T>> queue_;
+  std::shared_ptr<Queue<T>> queue_;
 };
 
 } // namespace spsc

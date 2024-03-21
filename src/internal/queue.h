@@ -6,7 +6,6 @@
 
 namespace kero {
 namespace spsc {
-namespace internal {
 
 template <typename T>
   requires std::movable<T>
@@ -70,7 +69,6 @@ private:
   Node<T>* tail_{};
 };
 
-} // namespace internal
 } // namespace spsc
 } // namespace kero
 

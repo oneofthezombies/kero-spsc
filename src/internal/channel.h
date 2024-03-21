@@ -20,8 +20,8 @@ struct Channel {
     auto operator=(Builder&&) -> Builder& = delete;
     auto operator=(const Builder&) -> Builder& = delete;
 
-    auto Build() -> Channel<T> {
-      auto queue = std::make_shared<typename internal::Queue<T>>();
+    auto Build() noexcept -> Channel<T> {
+      auto queue = std::make_shared<Queue<T>>();
       auto tx = Tx<T>{queue};
       auto rx = Rx<T>{queue};
       return Channel<T>{std::move(tx), std::move(rx)};
