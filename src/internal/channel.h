@@ -1,5 +1,5 @@
-#ifndef KERO_SPSC_CHANNEL_H
-#define KERO_SPSC_CHANNEL_H
+#ifndef KERO_SPSC_INTERNAL_CHANNEL_H
+#define KERO_SPSC_INTERNAL_CHANNEL_H
 
 #include "rx.h"
 #include "tx.h"
@@ -45,4 +45,4 @@ private:
 } // namespace spsc
 } // namespace kero
 
-#endif // KERO_SPSC_CHANNEL_H
+#endif // KERO_SPSC_INTERNAL_CHANNEL_H

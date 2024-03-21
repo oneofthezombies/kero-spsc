@@ -1,5 +1,5 @@
-#ifndef KERO_SPSC_TX_H
-#define KERO_SPSC_TX_H
+#ifndef KERO_SPSC_INTERNAL_TX_H
+#define KERO_SPSC_INTERNAL_TX_H
 
 #include "queue.h"
 #include <memory>
@@ -31,4 +31,4 @@ private:
 } // namespace spsc
 } // namespace kero
 
-#endif // KERO_SPSC_TX_H
+#endif // KERO_SPSC_INTERNAL_TX_H
