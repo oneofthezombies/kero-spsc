@@ -1,5 +1,11 @@
 cc_library(
     name = "kero_spsc",
+    srcs = [
+        "src/channel.h",
+        "src/internal/queue.h",
+        "src/rx.h",
+        "src/tx.h",
+    ],
     hdrs = [
         "src/kero_spsc.h",
     ],
