@@ -24,6 +24,8 @@ public:
     return queue_->TryDequeue();
   }
 
+  auto IsEmpty() const noexcept -> bool { return queue_->IsEmpty(); }
+
 private:
   std::shared_ptr<Queue<T>> queue_;
 };

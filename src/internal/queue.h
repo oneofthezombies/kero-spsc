@@ -64,6 +64,10 @@ public:
     return data;
   }
 
+  auto IsEmpty() const noexcept -> bool {
+    return head_.load(std::memory_order_relaxed)->next == nullptr;
+  }
+
 private:
   std::atomic<Node<T>*> head_{};
   Node<T>* tail_{};
