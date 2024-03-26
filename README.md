@@ -9,7 +9,7 @@ However, the status of the C++ programming language in the current compiler indu
 
 ## Features
 
-### Memory Safety
+### Memory-Safe
 
 - Only `std::movable` type items are allowed.  
 - Even if either `Tx` or `Rx` is destroyed, the life of the queue is guaranteed to be `std::shared_ptr`.
