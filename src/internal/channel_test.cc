@@ -33,7 +33,7 @@ TEST(ChannelTest, Concurrent) {
 
 TEST(ChannelTest, MultipleConcurrent) {
   std::vector<std::thread> threads{};
-  for (int i = 0; i < 100; ++i) {
+  for (int i = 0; i < 10000; ++i) {
     auto [tx, rx] =
         kero::spsc::Channel<std::unique_ptr<int>>::Builder{}.Build();
     std::thread send_thread([tx = std::move(tx)] {

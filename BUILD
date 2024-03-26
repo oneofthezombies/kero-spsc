@@ -26,3 +26,12 @@ cc_test(
         "@googletest//:gtest_main",
     ],
 )
+
+cc_binary(
+    name = "kero_spsc_example",
+    srcs = ["src/kero_spsc_example.cc"],
+    copts = ["-std=c++20"],
+    deps = [
+        ":kero_spsc",
+    ],
+)

@@ -30,7 +30,7 @@ public:
   Queue() noexcept {
     auto node = new Node<T>();
     head_.store(node, std::memory_order_relaxed);
-    tail_ = node;
+    tail_.store(node, std::memory_order_relaxed);
   }
 
   ~Queue() noexcept {
@@ -47,8 +47,9 @@ public:
 
   auto Enqueue(T&& data) noexcept -> void {
     auto node = new Node<T>(std::move(data));
-    tail_->next = node;
-    tail_ = node;
+    auto tail = tail_.load(std::memory_order_acquire);
+    tail->next = node;
+    tail_.store(node, std::memory_order_release);
   }
 
   auto TryDequeue() noexcept -> std::optional<T> {
@@ -70,7 +71,7 @@ public:
 
 private:
   std::atomic<Node<T>*> head_{};
-  Node<T>* tail_{};
+  std::atomic<Node<T>*> tail_{};
 };
 
 } // namespace spsc
